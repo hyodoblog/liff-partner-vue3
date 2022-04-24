@@ -10,6 +10,11 @@ let userId: string | null
 if (IS_PROD) {
   liff.init({ liffId: LIFF_ID })
   liff.ready.then(() => {
+    console.info(liff.isInClient)
+    console.info(liff.isInClient())
+    console.info(liff.isLoggedIn)
+    console.info(liff.isLoggedIn())
+    console.info(liff)
     userId = liff.getContext()?.userId || null
     isLoggedIn = liff.isLoggedIn()
   })
