@@ -3,15 +3,24 @@ import { IS_PROD, LIFF_ID } from '~/constants'
 import Loading from '~/components/Loading.vue'
 import HelloWorld from '~/components/HelloWorld.vue'
 import liff from '@line/liff'
+import { onMounted } from 'vue';
 
 let isLoggedIn = false
-let userId: string | undefined
-console.info(LIFF_ID)
-if (IS_PROD) {
-  liff.init({ liffId: LIFF_ID })
-  userId = liff.getContext()?.userId
-  isLoggedIn = liff.isLoggedIn()
-}
+let userId: string | null
+
+onMounted(async () => {
+  try {
+    if (IS_PROD) {
+      await liff.init({ liffId: LIFF_ID })
+      userId = liff.getContext()?.userId || null
+      isLoggedIn = liff.isLoggedIn()
+    }
+  } catch (err) {
+    console.error(err)
+    isLoggedIn = false
+    userId = null
+  }
+})
 </script>
 
 <template>
