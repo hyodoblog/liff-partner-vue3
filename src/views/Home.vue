@@ -31,4 +31,6 @@ onMounted(async () => {
   <Error v-if="isError" :err="err" />
   <HelloWorld v-else-if="isLoggedIn" :user-id="`${userId}`" />
   <Loading v-else />
+
+  {{ liff }}
 </template>
