@@ -7,7 +7,7 @@ import liff from '@line/liff'
 let isLoggedIn = false
 let userId: string | undefined
 if (IS_PROD) {
-  liff.init({ liffId: LIFF_ID! })
+  liff.init({ liffId: LIFF_ID })
   userId = liff.getContext()?.userId
   isLoggedIn = liff.isLoggedIn()
 }
@@ -16,4 +16,6 @@ if (IS_PROD) {
 <template>
   <HelloWorld v-if="isLoggedIn" :user-id="`${userId}`" />
   <Loading v-else />
+
+  {{ LIFF_ID }}
 </template>
